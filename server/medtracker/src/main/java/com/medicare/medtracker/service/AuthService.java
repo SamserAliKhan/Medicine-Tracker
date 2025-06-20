@@ -14,26 +14,22 @@ public class AuthService {
     @Autowired
     private UserRepository userRepository;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    public String signup(SignupRequest req){
+    public void signup(SignupRequest req){
         if(userRepository.findByEmail(req.getEmail()).isPresent()){
-            return "Email already registered!";
+            throw new RuntimeException("Email already registered");
         }
         else{
             User user = new User();
+            user.setName(req.getName());
             user.setEmail(req.getEmail());
             user.setPassword(encoder.encode(req.getPassword()));
+            user.setPhone_number(req.getPhone_number());
+            user.setAge(req.getAge());
             userRepository.save(user);
-            return "user Registered successfully";
         }
     }
-    public String login(LoginRequest req){
-        return userRepository.findByEmail(req.getEmail()).map(
-                user -> {
-                    if(encoder.matches(req.getPassword(), user.getPassword()))
-                        return "Login successful!";
-                    else
-                        return "Invalid password!";
-                }
-        ).orElse("User not found!");
+    public void login(LoginRequest req){
+        User user = userRepository.findByEmail(req.getEmail()).orElseThrow(()->new RuntimeException("User Not Found!"));
+        if(!encoder.matches(req.getPassword(),user.getPassword()))throw new RuntimeException(("Invalid Password!"));
     }
 }

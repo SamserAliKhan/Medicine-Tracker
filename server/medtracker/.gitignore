@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+#Criticals
+src/main/resources/application.properties
