@@ -4,6 +4,7 @@ import com.medicare.medtracker.dot.SignupRequest;
 import com.medicare.medtracker.dot.LoginRequest;
 import com.medicare.medtracker.models.User;
 import com.medicare.medtracker.repository.UserRepository;
+import com.medicare.medtracker.security.jwt.JwtUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,8 +29,16 @@ public class AuthService {
             userRepository.save(user);
         }
     }
-    public void login(LoginRequest req){
-        User user = userRepository.findByEmail(req.getEmail()).orElseThrow(()->new RuntimeException("User Not Found!"));
-        if(!encoder.matches(req.getPassword(),user.getPassword()))throw new RuntimeException(("Invalid Password!"));
+    @Autowired
+    private JwtUtils jwtUtil;
+
+    public String login(LoginRequest req) {
+        User user = userRepository.findByEmail(req.getEmail())
+                .orElseThrow(() -> new RuntimeException("User Not Found!"));
+        if (!encoder.matches(req.getPassword(), user.getPassword()))
+            throw new RuntimeException("Invalid Password!");
+
+        return jwtUtil.generateToken(user.getEmail()); // Return token on successful login
     }
+
 }

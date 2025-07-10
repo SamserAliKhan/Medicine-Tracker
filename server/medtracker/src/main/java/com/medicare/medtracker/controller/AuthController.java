@@ -1,5 +1,6 @@
 package com.medicare.medtracker.controller;
 
+import java.util.HashMap;
 import com.medicare.medtracker.dot.*;
 import com.medicare.medtracker.service.AuthService;
 import jakarta.validation.Valid;
@@ -23,10 +24,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> Login(@RequestBody LoginRequest req){
+    public ResponseEntity<?> Login(@RequestBody LoginRequest req){
          try{
-             authService.login(req);
-             return ResponseEntity.ok("Login Successful");
+             String token = authService.login(req);
+             HashMap<String, String> response = new HashMap<>();
+             response.put("message", "Login Successful");
+             response.put("token", token);
+             return ResponseEntity.ok(response);
          }catch (RuntimeException err){
              return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(err.getMessage());
          }

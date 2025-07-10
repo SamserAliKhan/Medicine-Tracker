@@ -1,6 +1,8 @@
 package com.medicare.medtracker.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,14 +12,16 @@ public class Medicine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotBlank(message = "Medicine name cannot be blank")
     private String name;
-
     private int totalQuantity;
-
     private int refillThreshold;
-
     private LocalDateTime lastUpdated;
+
+    // ✅ Associate medicine with a user
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     // Constructors
     public Medicine() {}
@@ -69,5 +73,9 @@ public class Medicine {
 
     public void setLastUpdated(LocalDateTime lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -1,57 +1,86 @@
 package com.medicare.medtracker.controller;
 
 import com.medicare.medtracker.models.Medicine;
+import com.medicare.medtracker.models.User;
 import com.medicare.medtracker.repository.MedicineRepository;
+import com.medicare.medtracker.security.jwt.CurrentUser;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/medicines")
-@CrossOrigin(origins = "*") // allows frontend (like React) to access this API
+@CrossOrigin(origins = "*")
 public class MedicineController {
 
     @Autowired
     private MedicineRepository medicineRepository;
 
-    // ✅ GET all medicines
+    @Autowired
+    private CurrentUser currentUser;
+
+    // ✅ GET all medicines for logged-in user
     @GetMapping
-    public List<Medicine> getAllMedicines() {
-        return medicineRepository.findAll();
+    public List<Medicine> getAllMedicinesForUser() {
+        User user = currentUser.get();
+        return medicineRepository.findByUser(user); // Requires this custom repo method
     }
 
-    // ✅ GET medicine by ID
+    // ✅ GET medicine by ID for logged-in user
     @GetMapping("/{id}")
-    public Optional<Medicine> getMedicineById(@PathVariable Long id) {
-        return medicineRepository.findById(id);
+    public ResponseEntity<Object> getMedicineById(@PathVariable Long id) {
+        User user = currentUser.get();
+
+        return medicineRepository.findByIdAndUser(id, user)
+                .<ResponseEntity<Object>>map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(403).body("Unauthorized access or medicine not found"));
     }
 
-    // ✅ POST a new medicine
+
+    // ✅ POST new medicine (for logged-in user)
     @PostMapping
-    public Medicine createMedicine(@RequestBody Medicine medicine) {
-        return medicineRepository.save(medicine);
+    public ResponseEntity<?> addMedicine(@Valid @RequestBody Medicine medicine) {
+        try{
+            User user = currentUser.get();
+            medicine.setUser(user); // Associate with logged-in user
+            return ResponseEntity.ok(medicineRepository.save(medicine));
+
+        }catch (Exception err){
+            err.printStackTrace(); // log the error
+            return ResponseEntity.status(500).body("🔥 Internal Error: " + err.getMessage());
+
+        }
     }
 
-    // ✅ PUT (update) an existing medicine
+    // ✅ UPDATE medicine only if belongs to user
     @PutMapping("/{id}")
-    public Medicine updateMedicine(@PathVariable Long id, @RequestBody Medicine updatedMedicine) {
-        return medicineRepository.findById(id).map(medicine -> {
-            medicine.setName(updatedMedicine.getName());
-            medicine.setTotalQuantity(updatedMedicine.getTotalQuantity());
-            medicine.setRefillThreshold(updatedMedicine.getRefillThreshold());
-            medicine.setLastUpdated(updatedMedicine.getLastUpdated());
-            return medicineRepository.save(medicine);
-        }).orElseGet(() -> {
-            updatedMedicine.setId(id);
-            return medicineRepository.save(updatedMedicine);
-        });
+    public ResponseEntity<Object> updateMedicine(@PathVariable Long id, @RequestBody Medicine updated) {
+        User user = currentUser.get();
+
+        return medicineRepository.findByIdAndUser(id, user)
+                .<ResponseEntity<Object>>map(medicine -> {
+                    medicine.setName(updated.getName());
+                    medicine.setTotalQuantity(updated.getTotalQuantity());
+                    medicine.setRefillThreshold(updated.getRefillThreshold());
+                    medicine.setLastUpdated(updated.getLastUpdated());
+                    Medicine saved = medicineRepository.save(medicine);
+                    return ResponseEntity.ok(saved);
+                })
+                .orElseGet(() -> ResponseEntity.status(403).body("Unauthorized or not found"));
     }
 
-    // ✅ DELETE a medicine by ID
+
+    // ✅ DELETE medicine if owned by user
     @DeleteMapping("/{id}")
-    public void deleteMedicine(@PathVariable Long id) {
-        medicineRepository.deleteById(id);
+    public ResponseEntity<?> deleteMedicine(@PathVariable Long id) {
+        User user = currentUser.get();
+        return medicineRepository.findByIdAndUser(id, user).map(medicine -> {
+            medicineRepository.delete(medicine);
+            return ResponseEntity.ok("Deleted successfully");
+        }).orElse(ResponseEntity.status(403).body("Unauthorized or not found"));
     }
 }
