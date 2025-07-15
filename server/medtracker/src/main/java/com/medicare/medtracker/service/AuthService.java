@@ -24,7 +24,7 @@ public class AuthService {
             user.setName(req.getName());
             user.setEmail(req.getEmail());
             user.setPassword(encoder.encode(req.getPassword()));
-            user.setPhone_number(req.getPhone_number());
+            user.setPhoneNumber(req.getPhone_number());
             user.setAge(req.getAge());
             userRepository.save(user);
         }

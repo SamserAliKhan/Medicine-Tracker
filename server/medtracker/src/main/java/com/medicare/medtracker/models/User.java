@@ -21,7 +21,7 @@ public class User {
     private String password;
 
     @Column(length = 10)
-    private String Phone_number;
+    private String phoneNumber;
     private Integer age;
 
 }
