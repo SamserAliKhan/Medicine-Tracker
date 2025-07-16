@@ -2,8 +2,9 @@ import {useState,useContext,useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
-
+import { AuthContext } from '../context/AuthContext';
 const Login = () => {
+    const { setIsLoggedIn } = useContext(AuthContext);
     const { darkMode, setDarkMode } = useContext(ThemeContext);
     const [formData, setFormData] = useState({
         email: "",
@@ -31,6 +32,7 @@ const Login = () => {
             console.log("Login response:", response.data);
             const token = response.data.token;
             if (response.status === 200) {
+                setIsLoggedIn(true);
                 alert("Login successful!");
                 console.log("Token to be stored:", token);
                 localStorage.setItem("token", token);

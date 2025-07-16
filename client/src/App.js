@@ -9,33 +9,47 @@ import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
+import { AuthProvider } from "./context/AuthContext";
+import AddMedicine from "./pages/AddMedicine.jsx";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      
-      <Routes>
-        <Route path="/" element={<Navigate to="/signup" replace />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        {/* Add more routes as needed */}
-        {/* Protected route */}
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        {/* <Route path="/profile" element={<Profile />} /> */}
-        {/* <Route path="/settings" element={<Settings />} /> */}
-        {/* <Route path="*" element={<NotFound />} /> */}
-        {/* Redirect to 404 or NotFound component if no route matches */}
-        <Route path="*" element={<Navigate to="/404" replace />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Navbar />
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/add-medicine"
+            element={
+              <PrivateRoute>
+                <AddMedicine />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/404" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
+
 export default App;
