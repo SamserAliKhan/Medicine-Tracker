@@ -48,7 +48,7 @@ const Dashboard = () => {
     const fetchMedicines = async () => {
       const token = localStorage.getItem("token");
       if (!token) return navigate("/login");
-      const uri = `${process.env.REACT_APP_API_BASE_URL}/user/me`;
+      const uri = `${process.env.REACT_APP_API_BASE_URL}/medicines`;
       const option = {
         headers: {
           Authorization: `Bearer ${token}`,

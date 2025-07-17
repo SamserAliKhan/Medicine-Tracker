@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
 
 const backdrop = {
   hidden: { opacity: 0 },
@@ -29,18 +30,14 @@ const EditMedicineModal = ({ medicine, onClose, onSave }) => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(
-        `http://localhost:8080/api/medicines/${medicine.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
+      const uri = `${process.env.REACT_APP_API_BASE_URL}/medicines/${medicine.id}`;
+      const option = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const res = await axios.put(uri, formData, option);
       if (!res.ok) throw new Error("Failed to update medicine");
 
       const updatedMedicine = await res.json();
