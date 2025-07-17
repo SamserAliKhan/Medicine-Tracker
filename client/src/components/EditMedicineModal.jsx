@@ -36,17 +36,18 @@ const EditMedicineModal = ({ medicine, onClose, onSave }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-      }
-      const res = await axios.put(uri, formData, option);
-      if (!res.ok) throw new Error("Failed to update medicine");
+      };
 
-      const updatedMedicine = await res.json();
+      const res = await axios.put(uri, formData, option);
+
+      const updatedMedicine = res.data; // already parsed JSON
       onSave(updatedMedicine); // update UI
       onClose(); // close modal
     } catch (error) {
       console.error("❌ Edit failed:", error);
       alert("Failed to update medicine. Please try again.");
     }
+
   };
 
   return (

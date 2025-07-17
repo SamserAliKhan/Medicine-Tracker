@@ -27,13 +27,12 @@ const AddMedicine = () => {
     try {
       const res = await axios.post(uri, form, options);
       console.log("Medicine added:", res.data);
-
-      if (!res.ok) throw new Error("Failed to add medicine");
-
       alert("Medicine added successfully");
       navigate("/dashboard");
     } catch (err) {
-      alert(err.message);
+      console.error("Error adding medicine:", err);
+      alert("Failed to add medicine: " + (err.response?.data || err.message));
+
     }
   };
 

@@ -77,27 +77,26 @@ const Dashboard = () => {
   };
 
   const handleDelete = async (id) => {
+    const options = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    const uri = `${process.env.REACT_APP_API_BASE_URL}/medicines/${id}`;
+    const token = localStorage.getItem("token");
     const confirm = window.confirm("Are you sure you want to delete this medicine?");
     if (!confirm) return;
 
     try {
-      const token = localStorage.getItem("token");
-      const uri = `${process.env.REACT_APP_API_BASE_URL}/medicines/${id}`;
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+      
       if (!token) return navigate("/login");
       const res = await axios.delete(uri, options);
-
-      if (res.ok) {
-        setMedicines((prev) => prev.filter((m) => m.id !== id));
-      } else {
-        console.error("Failed to delete medicine");
-      }
+      console.log("Medicine deleted:", res.data);
+      setMedicines((prev) => prev.filter((med) => med.id !== id));
+      alert("Medicine deleted successfully");
     } catch (err) {
-      console.error("Error deleting medicine:", err);
+      console.error("Failed deleting medicine:", err);
+      alert("Failed to delete medicine: " + (err.response?.data || err.message));
     }
   };
 
