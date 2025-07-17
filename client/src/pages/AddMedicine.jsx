@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AddMedicine = () => {
   const [form, setForm] = useState({
@@ -13,18 +14,19 @@ const AddMedicine = () => {
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const uri = `${process.env.REACT_APP_API_BASE_URL}/medicines`;
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
     try {
-      const res = await fetch("http://localhost:8080/api/medicines", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-        body: JSON.stringify(form),
-      });
+      const res = await axios.post(uri, form, options);
+      console.log("Medicine added:", res.data);
 
       if (!res.ok) throw new Error("Failed to add medicine");
 

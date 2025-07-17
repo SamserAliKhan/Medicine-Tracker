@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
-import { Sun, Moon } from "lucide-react"; // or use emojis
 
 const Signup = () => {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
@@ -23,7 +22,7 @@ const Signup = () => {
   // Function to handle form submission
   // This function will be called when the form is submitted
   const handleSubmit = async (e) => {
-    const uri = "http://localhost:8080/api/auth/signup";
+    const uri = `${process.env.REACT_APP_API_BASE_URL}/auth/signup`;
     const options = {
       headers: {
         "Content-Type": "application/json",

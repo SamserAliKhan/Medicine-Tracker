@@ -17,16 +17,18 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
+      const uri = `${process.env.REACT_APP_API_BASE_URL}/user/me`;
+      const option ={
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      }
       if (!token) {
         navigate("/login");
         return;
       }
       try {
-        const res = await axios.get("http://localhost:8080/api/user/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await axios.get(uri, option);
         setUser(res.data);
         console.log("👤 User fetched:", res.data);
       } catch (error) {
@@ -46,13 +48,15 @@ const Dashboard = () => {
     const fetchMedicines = async () => {
       const token = localStorage.getItem("token");
       if (!token) return navigate("/login");
+      const uri = `${process.env.REACT_APP_API_BASE_URL}/user/me`;
+      const option = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
 
       try {
-        const res = await axios.get("http://localhost:8080/api/medicines", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await axios.get(uri, option);
         setMedicines(res.data);
         console.log("💊 Medicines fetched:", res.data);
       } catch (err) {

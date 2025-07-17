@@ -21,7 +21,7 @@ const Login = () => {
     }, [navigate]);      
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const uri = "http://localhost:8080/api/auth/login";
+        const uri = `${process.env.REACT_APP_API_BASE_URL}/auth/login`;
         const options = {
             headers: {
                 "Content-Type": "application/json",
