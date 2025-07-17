@@ -82,12 +82,14 @@ const Dashboard = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:8080/api/medicines/${id}`, {
-        method: "DELETE",
+      const uri = `${process.env.REACT_APP_API_BASE_URL}/medicines/${id}`;
+      const options = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      };
+      if (!token) return navigate("/login");
+      const res = await axios.delete(uri, options);
 
       if (res.ok) {
         setMedicines((prev) => prev.filter((m) => m.id !== id));
