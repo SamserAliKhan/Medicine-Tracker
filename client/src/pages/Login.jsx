@@ -22,6 +22,8 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const uri = `${process.env.REACT_APP_API_BASE_URL}/auth/login`;
+        console.log("uri:", uri);
+        
         const options = {
             headers: {
                 "Content-Type": "application/json",
