@@ -54,43 +54,55 @@ const Login = () => {
         }
     };
     return (
-        <div className={`${darkMode ? "dark" : ""} min-h-screen`}>
-            <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-                <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md w-full max-w-md">
-                    <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">Login</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-4">
-                            <label className="block text-gray-700 dark:text-gray-300 mb-2" htmlFor="email">Email</label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 dark:focus:ring-blue-500"
-                            />
-                        </div>
-                        <div className="mb-6">
-                            <label className="block text-gray-700 dark:text-gray-300 mb-2" htmlFor="password">Password</label>
-                            <input
-                                type="password"
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                required
-                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 dark:focus:ring-blue-500"
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 dark:focus:ring-blue-500"
-                        >
-                            Login
-                        </button>
-                    </form>
-                </div>
-            </div>            
+      <div className={`${darkMode ? "dark" : ""} min-h-screen`}>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+          <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">
+              Login
+            </h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 dark:text-gray-300 mb-2"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600  dark:bg-gray-700 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 dark:focus:ring-blue-500"
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  className="block text-gray-700 dark:text-gray-300 mb-2"
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 dark:focus:ring-blue-500"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 dark:focus:ring-blue-500"
+              >
+                Login
+              </button>
+            </form>
+          </div>
         </div>
+      </div>
     );
 };
 export default Login;

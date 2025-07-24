@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import EditMedicineModal from "../components/EditMedicineModal.jsx";
 import MedicineCard from "../components/MedicineCard.jsx";
+import PageTransition from "../components/PageTransition.js";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -116,6 +117,7 @@ const Dashboard = () => {
   }
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white px-4 py-6">
       {/* Welcome Banner */}
       <div className="text-center py-6 bg-blue-50 dark:bg-gray-900 shadow-lg rounded-xl mx-4 mt-4">
@@ -150,6 +152,7 @@ const Dashboard = () => {
         />
       )}
     </div>
+    </PageTransition>
   );
 };
 
