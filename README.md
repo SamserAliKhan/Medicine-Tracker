@@ -6,16 +6,16 @@ Built with **Spring Boot**, **PostgreSQL**, and **React**, the system ensures th
 ---
 
 ##  Table of Contents
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Architecture](#-architecture)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Screenshots](#-screenshots)
-- [API Endpoints](#-api-endpoints)
-- [Security](#-security)
-- [Future Enhancements](#-future-enhancements)
-- [License](#-license)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [API Endpoints](#api-endpoints)
+- [Security](#security)
+- [Future Enhancements](#future-enhancements)
+- [License](#license)
 
 ---
 
