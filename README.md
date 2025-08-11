@@ -60,7 +60,31 @@ Built with **Spring Boot**, **PostgreSQL**, and **React**, the system ensures th
 
 ## Architecture
 
+The **Medicine Tracker** follows a classic **three-tier architecture**:
 
+1. **Frontend (React)**
+   - Provides a responsive and interactive user interface.
+   - Handles authentication via JWT tokens stored in the browser.
+   - Sends HTTP requests to the backend REST APIs using Axios.
+
+2. **Backend (Spring Boot)**
+   - Exposes secured REST endpoints for authentication and medicine management.
+   - Implements business logic, validation, and error handling.
+   - Uses Spring Security to enforce JWT-based access control.
+
+3. **Database (PostgreSQL)**
+   - Stores user accounts, medicine records, and related metadata.
+   - Accessed via Spring Data JPA/Hibernate.
+
+---
+
+### Data Flow
+
+```plaintext
+[React Frontend]  -->  [Spring Boot Backend]  -->  [PostgreSQL Database]
+       ↑                     ↓                          ↑
+   JWT Token           JSON Responses               Persistent Data
+   
 ---
 
 ##  Installation
