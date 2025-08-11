@@ -1,9 +1,23 @@
 #  Medicine Tracker
+<div align="center">
+  
+# 🩺 Medicine Tracker
 
-A secure, user-friendly **full-stack web application** for tracking home medicines, managing inventory, and receiving timely refill reminders.  
-Built with **Spring Boot**, **PostgreSQL**, and **React**, the system ensures that each user’s data is stored securely with **JWT-based authentication**.
+**Track your medicines, manage stock, and get refill reminders — securely.**  
+_A full-stack web app powered by **Spring Boot**, **React**, and **PostgreSQL** with **JWT Authentication**._
+
+[![GitHub Stars](https://img.shields.io/github/stars/SamserAliKhan/Medicine-Tracker?style=flat-square&color=yellow)](https://github.com/SamserAliKhan/Medicine-Tracker/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/SamserAliKhan/Medicine-Tracker?style=flat-square&color=orange)](https://github.com/SamserAliKhan/Medicine-Tracker/network/members)
+[![GitHub Issues](https://img.shields.io/github/issues/SamserAliKhan/Medicine-Tracker?style=flat-square&color=critical)](https://github.com/SamserAliKhan/Medicine-Tracker/issues)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+![Java](https://img.shields.io/badge/Java-17-blue?style=flat-square&logo=java)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?style=flat-square&logo=springboot)
+![React](https://img.shields.io/badge/React-18-blue?style=flat-square&logo=react)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14-blue?style=flat-square&logo=postgresql)
 
 ---
+
+</div>
 
 ##  Table of Contents
 - [Features](#features)
