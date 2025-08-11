@@ -11,11 +11,11 @@ Built with **Spring Boot**, **PostgreSQL**, and **React**, the system ensures th
 - [Architecture](#architecture)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Screenshots](#screenshots)
+<!-- - [Screenshots](#screenshots) -->
 - [API Endpoints](#api-endpoints)
 - [Security](#security)
 - [Future Enhancements](#future-enhancements)
-- [License](#license)
+<!-- - [License](#license) -->
 
 ---
 
@@ -101,21 +101,54 @@ Built with **Spring Boot**, **PostgreSQL**, and **React**, the system ensures th
 
   ---
 
-## Screenshots
+<!-- ## Screenshots
 
-  ---
+  --- -->
 
 ## API Endpoints
+
+  ### **Authentication**
+| Method | Endpoint           | Description                | Auth Required |
+|--------|-------------------|----------------------------|---------------|
+| POST   | `/api/auth/signup` | Register a new user        | ❌            |
+| POST   | `/api/auth/login`  | Login user                 | ❌            |
+| GET    | `/api/auth/me`     | Get current user info      | ✅ JWT Token  |
+
+---
+
+### **Medicines**
+| Method | Endpoint                  | Description                             | Auth Required |
+|--------|---------------------------|-----------------------------------------|---------------|
+| GET    | `/api/medicines`           | Get all medicines for the logged-in user| ✅ JWT Token  |
+| POST   | `/api/medicines`           | Add a new medicine                      | ✅ JWT Token  |
+| PUT    | `/api/medicines/{id}`      | Update an existing medicine             | ✅ JWT Token  |
+| DELETE | `/api/medicines/{id}`      | Delete a medicine                       | ✅ JWT Token  |
+
+> **Note:**  
+> - All authenticated routes require the JWT token to be sent in the `Authorization` header as:  
+>   ```
+>   Authorization: Bearer <your_token_here>
+>   ```
+> - Replace `{id}` with the medicine's unique ID in the URL.
 
   ---
 
 ## Security
+- JWT authentication ensures that only authorized users can access their medicines.
+- Passwords are stored in a hashed form (BCrypt).
+- CORS configured to allow only trusted origins.
+- Validation prevents malformed or malicious data.
 
   ---
 
 ## Future Enhancements
+- Push notifications for reminders.
+- Role-based access (e.g., family members, caregivers).
+- Cloud storage integration for prescription images.
+- Multi-language support.
+- PWA (Progressive Web App) support for offline usage.
 
   ---
 
-## License
+<!-- ## License -->
 
