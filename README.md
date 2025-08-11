@@ -84,7 +84,7 @@ The **Medicine Tracker** follows a classic **three-tier architecture**:
 [React Frontend]  -->  [Spring Boot Backend]  -->  [PostgreSQL Database]
        ↑                     ↓                          ↑
    JWT Token           JSON Responses               Persistent Data
-   
+```
 ---
 
 ##  Installation
