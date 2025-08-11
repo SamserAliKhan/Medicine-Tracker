@@ -10,8 +10,7 @@ Built with **Spring Boot**, **PostgreSQL**, and **React**, the system ensures th
 - [Tech Stack](#tech-stack)
 - [Architecture](#architecture)
 - [Installation](#installation)
-- [Usage](#usage)
-<!-- - [Screenshots](#screenshots) -->
+- [Usage](#usage)<!-- - [Screenshots](#screenshots) -->
 - [API Endpoints](#api-endpoints)
 - [Security](#security)
 - [Future Enhancements](#future-enhancements)
@@ -99,7 +98,7 @@ Built with **Spring Boot**, **PostgreSQL**, and **React**, the system ensures th
 - Edit or delete entries as required.  
 - Receive low stock and expiry reminders.  
 
-  ---
+---
 
 <!-- ## Screenshots
 
@@ -131,7 +130,7 @@ Built with **Spring Boot**, **PostgreSQL**, and **React**, the system ensures th
 >   ```
 > - Replace `{id}` with the medicine's unique ID in the URL.
 
-  ---
+---
 
 ## Security
 - JWT authentication ensures that only authorized users can access their medicines.
@@ -139,7 +138,7 @@ Built with **Spring Boot**, **PostgreSQL**, and **React**, the system ensures th
 - CORS configured to allow only trusted origins.
 - Validation prevents malformed or malicious data.
 
-  ---
+---
 
 ## Future Enhancements
 - Push notifications for reminders.
@@ -148,7 +147,7 @@ Built with **Spring Boot**, **PostgreSQL**, and **React**, the system ensures th
 - Multi-language support.
 - PWA (Progressive Web App) support for offline usage.
 
-  ---
+---
 
 <!-- ## License -->
 
