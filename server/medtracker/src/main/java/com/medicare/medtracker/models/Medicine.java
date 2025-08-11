@@ -18,7 +18,7 @@ public class Medicine {
     private int refillThreshold;
     private LocalDateTime lastUpdated;
 
-    // ✅ Associate medicine with a user
+    //  Associate medicine with a user
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
